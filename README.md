@@ -1,4 +1,4 @@
-# rb1155doet
+# RB1155doet
 Resizable Bar no 1155 - PT BR 
 
 Olá, este repositório contem o roteiro de como fazer o Resizable Bar no 1155. Ele é referente ao video do 1155 do ET, que seguiu o tutorial do xCuri0. Em caso de duvidas, entre em nosso servidor do Discord, ou fale diretamente com o ET pelo Discord.
@@ -12,7 +12,7 @@ Video do 1155 do ET: https://www.youtube.com/watch?v=YlzRZQTnF14&t=1728s
 Github xCuri0: https://github.com/xCuri0?tab=repositories
 
 # Atenção
-Este processo irá ALTERARA parametros e configurações da BIOS do seu computador. Tenha cuidado para não BRICKAR SUA BIOS! Preste muita atenção no que está fazendo, e leia este artigo e o vídeo do tutorial POR INTEIRO antes mesmo de começar a fazer. Não nos RESPONSABILIZAMOS por QUALQUER DANO CAUSADO.
+Este processo irá ALTERARA parametros e configurações da BIOS do seu computador. Tenha cuidado para não BRICKAR SUA BIOS! Preste muita atenção no que está fazendo, e leia este artigo e o vídeo do tutorial POR INTEIRO antes mesmo de começar a fazer. Não nos RESPONSABILIZAMOS por QUALQUER DANO CAUSADO. 
 
 # Materiais necessarios
 -Windows (10 recomendado).  
@@ -47,3 +47,21 @@ Para isso eu baixei o UEFI Patch, e o arquivo patches.txt, e coloquei os arquivo
 
 Depois de modificarmos a BIOS várias vezes com o UEFI Tool, pode ser que aconteça um bug onde os arquivos do volume que estávamos mexendo saiam da ordem. Isso acontece principalmente em BIOS da ASUS, que é o meu caso.
 Para ver se isso aconteceu, eu abri a BIOS original em um UEFI Tool e a BIOS modificada em outro UEFI Tool, procurei por aquele GUID em que nós fizemos a modificação e chequei se todos os ‘’arquivos’’ estavam na mesma ordem. Os mais importantes são os PAD Files, esses têm que estar exatamente na mesma ordem, como estavam aí no meu caso. Caso tivesse dado errado, lá no repositório do xCuri0 ele descreveu maneiras de corrigir isso. Como não é o meu caso, vamos para o próximo passo.
+
+6 - DSDT Patches. https://github.com/xCuri0/ReBarUEFI/wiki/DSDT-Patching#sandyivy-bridge-dsdt-patch
+
+Para saber se vamos precisar aplicar os DSDT Patches, vamos ir no Gerenciador de Dispositivos, selecionar Exibir e depois Recursos por Conexão. Depois disso vamos expandir a seção Memória Grande e procurar o Pci Bus. Caso o Pci Bus terminar com uma sequência de 9 F ou mais, entao você não precisara fazer essa parte, mas caso a sequência for menos de 9 F como no meu caso, é melhor fazer essa parte. No meu caso está com uma sequência de 6 F, então seria bom eu fazer esse patch também.
+Pra fazer isso, abri o UEFI Tool e importei a última BIOS modificada que fizemos. Depois disso, pesquisei novamente por um GUID, nesse caso foi o 9F3A0016-AE55-4288-829D-D22FD344C34, que nesse caso, me levou ao módulo AmiBoardInfo. Nesse modulo, eu cliquei com o botão direito na imagem PE32 e fui em Extract Body, para extrair o conteúdo do modulo. Depois disso, salvei o conteúdo como AmiBoardInfo.efi. Depois disso, eu baixei o AmiBoardInfoTool, especificado no repositório do xCuri0, e extrai ele normalmente. Coloquei esse arquivo extraído junto ao arquivo EFI que tínhamos salvo no UEFI Tool, abri um cmd usando o menu do botão direito do Windows e rodei o comando “AmiBoardInfoTool -a AmiBoardInfo.efi -d DSDT.aml” para extrair o DSDT original da minha BIOS para o arquivo DSDT.aml. Após isso, fiz o download do programa iasl.exe do site da Intel, que também estava especificado no repositório, e rodei esse programa especificando o arquivo DSDT.aml. Fazendo isso, o programa decompilou o DSDT original da minha placa mãe para o arquivo DSDT.dsl, que conseguimos editar no notepad. Sendo assim, eu renomeei o arquivo DSDT.dsl para DSDTMod.dsl para não confundirmos o original com o modificado, e abri esse arquivo renomeado no Notepad.
+Agora que vem a parte mais complicada do procedimento inteiro, confesso que eu não entendi muito bem o que tava fazendo nessa parte, mas mesmo assim, segui à risca o tutorial do xCuri0. Procurei no notepad pelo texto “CreateQWordField” e encontrei uma seção semelhante a que estava lá no tutorial. Sendo assim, fiz a modificação da linha que estava M2LN = 0x0000000400000000 para M2MX = 0xFFFFFFFFF. E salvei o arquivo. Depois disso, recompilei o DSDT usando o comando iasl DSDTMod.dsl, e obtive um erro de compilação. Lá no tutorial do xCuri0, ele disse que caso tivesse algum erro, eu tinha que consertar ele manualmente. Mas é aí que tá o problema, eu já tava todo perdido e ainda aparece esse erro.
+Entao, fui bem custoso e procurei uma forma de ignorar o erro usando a ajuda do programa iasl.exe, encontrei uma forma de ignorar e fiz assim. Depois disso, recriei o arquivo AmiBoardInfo, usando o comando “AmiBoardInfoTool -a AmiBoardInfo.efi -d DSDTMod.aml -o AmiBoardInfoMod.efi”. Onde foram especificados, o arquivo efi original, o DSDT que modificamos, e o arquivo de saída. E depois inseri esse arquivo de saída de volta na nossa BIOS usando o UEFI Tool, de forma semelhante que fiz pra inserir o modulo do ResizeableBAR. 
+
+7 - Gravar a BIOS na placa. https://github.com/xCuri0/ReBarUEFI/wiki/Flashing-modified-UEFI
+
+Bom aqui vai depender 100% da fabricante e modelo da placa mãe, tem diversas formas de gravar uma BIOS, dentre elas, AFUDOS, AFUWIN, FPT, e gravadoras externas. Além dessas tradicionais, temos a própria seção de gravação de BIOS da placa mãe, e em alguns modelos, temos o programa da placa mãe no Windows que faz o update da BIOS.
+No meu caso, estou usando uma ASUS P8H61-M LX3 R2.0, e não consegui gravar a BIOS usando a seção de update da própria BIOS. Mas a maioria das placas ASUS tem o software Ai Suite, e lá tem um programa que faz o Update da BIOS. E é aí que entra a técnica milenar encontrada também no repositório do github do xCuri0.
+Eu instalei o Ai Suite, e lá fiz o "update" da BIOS, só que ao invés de seguir normalmente, eu fiz o seguinte: deixei o arquivo da BIOS original e o da BIOS modificada um do lado do outro no desktop, e na hora de selecionar o arquivo no EZ Update, eu escolhi o arquivo original, daí ele fez toda aquela checagem no arquivo e logo antes de apertar o botão Flash, eu apaguei o arquivo original e renomeei o modificado para o mesmo nome do original, sendo assim a BIOS gravou perfeitamente.
+Depois de flashear a BIOS, todos os parâmetros foram limpos, sendo assim tive que reconfigurar tudo, e repetir o passo 2 que era ativar o Above 4G Decoding, mas como agora eu já tinha a variável, era só digitar lá no grub modificado e já era. 
+
+8 – Modificar drivers AMD pelo Regedit. https://github.com/xCuri0/ReBarUEFI/wiki/Common-issues-(and-fixes)#how-do-i-enable-resizable-bar-on-unsupported-amd-gpus-
+
+Depois disso tudo, tive que fazer mais uma modificação, mas agora foi nos drivers da AMD. Como eu tenho uma RX580 2048SP que não tem o Resizeable BAR nativamente, precisei alterar algumas chaves no registro do Windows. Pra isso, usei o arquivo .reg disponibilizado pelo xCuri0 no repositório do github. Link vai estar na descrição. Apliquei o .reg e reiniciei o PC.
