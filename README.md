@@ -1,9 +1,16 @@
 # rb1155doet
 Resizable Bar no 1155 - PT BR 
 
-Olá, este repositório contem o roteiro de como fazer o Resizable Bar no 1155. Ele é referente ao video do 1155 do ET, que seguiu o tutorial do xCuri0. 
-Video do 1155 do ET: 
+Olá, este repositório contem o roteiro de como fazer o Resizable Bar no 1155. Ele é referente ao video do 1155 do ET, que seguiu o tutorial do xCuri0. Em caso de duvidas, entre em nosso servidor do Discord, ou fale diretamente com o ET pelo Discord.
+
+Discord do 1155doET: 1155doet
+
+Servidor do Discord: https://discord.gg/8TW3fNBGH5
+
+Video do 1155 do ET: https://www.youtube.com/watch?v=YlzRZQTnF14&t=1728s
+
 Github xCuri0: https://github.com/xCuri0?tab=repositories
+
 # Atenção
 Este processo irá ALTERARA parametros e configurações da BIOS do seu computador. Tenha cuidado para não BRICKAR SUA BIOS! Preste muita atenção no que está fazendo, e leia este artigo e o vídeo do tutorial POR INTEIRO antes mesmo de começar a fazer. Não nos RESPONSABILIZAMOS por QUALQUER DANO CAUSADO.
 
