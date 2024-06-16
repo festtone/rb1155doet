@@ -8,8 +8,9 @@ Github xCuri0: https://github.com/xCuri0?tab=repositories
 Este processo irá ALTERARA parametros e configurações da BIOS do seu computador. Tenha cuidado para não BRICKAR SUA BIOS! Preste muita atenção no que está fazendo, e leia este artigo e o vídeo do tutorial POR INTEIRO antes mesmo de começar a fazer. Não nos RESPONSABILIZAMOS por QUALQUER DANO CAUSADO.
 
 # Materiais necessarios
-Você precisará de um pendrive, o Windows (10 recomendado). Para o maior desempenho, após feito o procedimento, poderá usar uma distribuição Linux de sua preferencia para rodar os jogos (por enquanto, testamos o Big Linux), mas para fazer o processo o Windows é necessario. 
-Um pendrive de no minimo 8gb.
+-Windows (10 recomendado).  
+-Um pendrive de no minimo 8gb.
+-Para o maior desempenho, após feito o procedimento, poderá usar uma distribuição Linux de sua preferencia para rodar os jogos (por enquanto, testamos o Big Linux), mas para fazer o processo o Windows é necessario.
 
 # Passo a passo do procedimento
 
