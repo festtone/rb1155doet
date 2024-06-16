@@ -14,6 +14,16 @@ Github xCuri0: https://github.com/xCuri0?tab=repositories
 # Atenção
 Este processo irá ALTERARA parametros e configurações da BIOS do seu computador. Tenha cuidado para não BRICKAR SUA BIOS! Preste muita atenção no que está fazendo, e leia este artigo e o vídeo do tutorial POR INTEIRO antes mesmo de começar a fazer. Não nos RESPONSABILIZAMOS por QUALQUER DANO CAUSADO. 
 
+# FAQ
+Se o meu computador não dá imagem e ficar apitando o que devo fazer?
+R: Tire o computador da Tomada, e clique no botão power. Remova a pilha da BIOS e espere 20 minutos. Coloque novamente a pilha e coloque o computador na tomada e tente ligar.
+
+Se o meu computador não dá imagem e não ficar apitando o que devo fazer?
+R: Neste caso uma regravação de BIOS será necessaria, mas isso depende muito de cada placa mãe. No nosso caso, tivemos que colocar o chip da BIOS em uma regravadora (maquina especifica para regravação de BIOS). 
+
+Este procedimento funciona em placa mãe que não seja 1155 ou em Ryzen,
+R: Este especifico procedimento especifico só funciona em processadores e INTEL da SEGUNDA ou TERCEIRA geração e placas mães compativeis com estes . 
+
 # Materiais necessarios
 -Windows (10 recomendado).  
 -Um pendrive de no minimo 8gb.
